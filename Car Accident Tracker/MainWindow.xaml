@@ -8,24 +8,25 @@
         Title="Car Accident Tracker" Height="542" Width="1317" Background="Gray" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <ComboBox x:Name="DriverName_CB" HorizontalAlignment="Left" 
+        <TextBox x:Name="DriverName_TB" HorizontalAlignment="Left" 
                   Margin="10,87,0,0" VerticalAlignment="Top" 
                   Width="340" BorderBrush="#FFEAEAEA" 
-                  Foreground="#FF121010" />
+                  Foreground="#FF121010"/>
         
         <TextBlock HorizontalAlignment="Left" Margin="146,60,0,0"
                    TextWrapping="Wrap" Text="Driver Name"
                    VerticalAlignment="Top" Width="68"/>
 
-        <ComboBox x:Name="AccNumber_CB" HorizontalAlignment="Left" 
-                  Margin="423,87,0,0" VerticalAlignment="Top" Width="339"/>
+        <TextBox x:Name="AccNumber_TB" HorizontalAlignment="Left" 
+                  Margin="423,87,0,0" VerticalAlignment="Top" Width="339"
+                    />
 
         <TextBlock HorizontalAlignment="Left" Margin="543,60,0,0" 
                    TextWrapping="Wrap" Text="Accident Number" 
                    VerticalAlignment="Top" Width="99"/>
 
 
-        <ComboBox x:Name="AccLocation_CB" HorizontalAlignment="Left" 
+        <TextBox x:Name="AccLocation_TB" HorizontalAlignment="Left" 
                   Margin="805,87,0,0" VerticalAlignment="Top" Width="342"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="927,60,0,0"
