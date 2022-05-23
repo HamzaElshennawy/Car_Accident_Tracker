@@ -1,0 +1,67 @@
+﻿<Window x:Class="Car_Accident_Tracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Car_Accident_Tracker"
+        mc:Ignorable="d"
+        Title="Car Accident Tracker" Height="542" Width="1317" Background="Gray" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ComboBox x:Name="DriverName_CB" HorizontalAlignment="Left" 
+                  Margin="10,87,0,0" VerticalAlignment="Top" 
+                  Width="340" BorderBrush="#FFEAEAEA" 
+                  Foreground="#FF121010" />
+        
+        <TextBlock HorizontalAlignment="Left" Margin="146,60,0,0"
+                   TextWrapping="Wrap" Text="Driver Name"
+                   VerticalAlignment="Top" Width="68"/>
+
+        <ComboBox x:Name="AccNumber_CB" HorizontalAlignment="Left" 
+                  Margin="423,87,0,0" VerticalAlignment="Top" Width="339"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="543,60,0,0" 
+                   TextWrapping="Wrap" Text="Accident Number" 
+                   VerticalAlignment="Top" Width="99"/>
+
+
+        <ComboBox x:Name="AccLocation_CB" HorizontalAlignment="Left" 
+                  Margin="805,87,0,0" VerticalAlignment="Top" Width="342"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="927,60,0,0"
+                   TextWrapping="Wrap" Text="Accident Location" VerticalAlignment="Top" Width="98"/>
+
+        <DataGrid x:Name="DataGridXaml" Margin="10,142,10,26" >
+            <DataGrid.Resources >
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Turquoise"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Driver Name" Binding="{Binding DriverName}" Width="130"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding DriverPhoneNumber}" Width="130"/>
+                <DataGridTextColumn Header="License Number" Binding="{Binding DriverLicensesNumber}" Width="130"/>
+                <DataGridTextColumn Header="License Date" Binding="{Binding LicenseDate}" Width="130"/>
+                <DataGridTextColumn Header="Driver Age" Binding="{Binding DriverAge}" Width="130"/>
+                <DataGridTextColumn Header="Driver Email" Binding="{Binding DriverEmail}" Width="130"/>
+                <DataGridTextColumn Header="Driver Gender" Binding="{Binding DriverGender}" Width="130"/>
+                <DataGridTextColumn Header="Accident Location" Binding="{Binding AccidentLocation}" Width="*"/>
+                <DataGridTextColumn Header="Accident Number" Binding="{Binding AccidentNumber}" IsReadOnly="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="SearchBTN" Content="Search" Margin="1154,87,10,0" 
+                VerticalAlignment="Top" Height="22" Click="SearchBTN_Click"
+                
+                />
+        <Button x:Name="DisplayAllBTN" Content="Display All" Margin="1154,115,10,0" 
+            VerticalAlignment="Top" Height="22" Click="DisplayAllBTN_Click"
+                
+                />
+
+    </Grid>
+</Window>
