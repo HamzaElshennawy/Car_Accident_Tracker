@@ -20,6 +20,9 @@ namespace Car_Accident_Tracker
         public string AccidentLocation { get; set; }
         public string AccidentNumber { get; set; }
 
+        public string NumOfDeath { get; set; }
+        public string AccidentCause { get; set; }
+        public string TheAggrievedName { get; set; }
 
         public ObjectToDisplay(string driverName, string driverPhoneNumber, string driverLicensesNumber,
             string licenseDate, string driverAge, string driverEmail,
@@ -47,6 +50,9 @@ namespace Car_Accident_Tracker
             DriverGender = Acc.getAccidentDriver().DriverGender;
             AccidentLocation = Acc.AccidentLocation;
             AccidentNumber = Acc.AccidentNumber;
+            NumOfDeath = Acc.NumberOfDeath;
+            AccidentCause = Acc._AccidentCause;
+            TheAggrievedName = Acc.getTheAggrievedName().DriverName;
         }
     }
 }

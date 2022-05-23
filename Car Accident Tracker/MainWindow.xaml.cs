@@ -33,6 +33,7 @@ namespace Car_Accident_Tracker
             ReadDrivers();
             ReadLocations();
             ReadAccidentsNumbers();
+            
         }
 
         List<ObjectToDisplay> AllRecords = new List<ObjectToDisplay>();
@@ -50,12 +51,12 @@ namespace Car_Accident_Tracker
         }
 
         
-
+        
         private void SearchBTN_Click(object sender, RoutedEventArgs e)
         {
-            SearchByLocation();
+            //SearchByLocation();
             //SearchByDriverName();
-            //SearchByAccidentNumber();
+            SearchByAccidentNumber();
         }
 
         public void LoadAllAccidents()
@@ -83,7 +84,7 @@ namespace Car_Accident_Tracker
             {
                 string[] entries = line.Split(',');
                 Driver dri = new Driver();
-
+                Driver Aggrieved = new();
 
                 dri.DriverName = entries[0];
                 dri.DriverPhoneNumber = entries[1];
@@ -92,24 +93,27 @@ namespace Car_Accident_Tracker
                 dri.DriverAge = entries[4];
                 dri.DriverEmail = entries[5];
                 dri.DriverGender = entries[6];
+                Aggrieved.DriverName = entries[11];
 
-                Accident Acc = new Accident(dri);
+                
+                Accident Acc = new Accident(dri,Aggrieved);
                 Acc.AccidentLocation = entries[7];
                 Acc.AccidentNumber = entries[8];
+                Acc.NumberOfDeath = entries[9];
+                Acc._AccidentCause = entries[10];
+                
 
-                ObjectToDisplay obj = new ObjectToDisplay(dri.DriverName, dri.DriverPhoneNumber, dri.DriverLicensesNumber, dri.LicenseDate, dri.DriverAge, dri.DriverEmail
-                    , dri.DriverGender, Acc.AccidentLocation, Acc.AccidentNumber);
                 ObjectToDisplay obj2 = new ObjectToDisplay(Acc);
-                //DataGridXaml.Items.Add(obj);
                 AllRecords.Add(obj2);
                 AllAcc.Add(Acc);
-                
             }
+           
         }
         public void ReadDrivers()
         {
             Driver TempDriver = new();
-            Accident TempAcc = new(TempDriver);
+            Driver TempAggrieved = new();
+            Accident TempAcc = new(TempDriver,TempAggrieved);
             string TempDriverName;
             List<string> Names = new List<string>();
 
@@ -128,20 +132,13 @@ namespace Car_Accident_Tracker
             //DriverName_CB.ItemsSource = Names;
         }
 
-        private void AccNumber_CB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void DriverName_CB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //DriverName_TB.Text = DriversNames[0];
-        }
-
+        
+        
         public void ReadLocations()
         {
             Driver TempDriver = new();
-            Accident TempAcc = new(TempDriver);
+            Driver TempAggrieved = new();
+            Accident TempAcc = new(TempDriver,TempAggrieved);
             string TempLocation;
             List<string> Locations = new List<string>();
 
@@ -161,7 +158,8 @@ namespace Car_Accident_Tracker
         public void ReadAccidentsNumbers()
         {
             Driver TempDriver = new();
-            Accident TempAcc = new(TempDriver);
+            Driver TempAggrieved = new();
+            Accident TempAcc = new(TempDriver, TempAggrieved);
             string TempAccidentNumber;
             List<string> Accidents = new List<string>();
 
@@ -183,7 +181,8 @@ namespace Car_Accident_Tracker
             string LocationName = AccLocation_TB.Text;
 
             Driver TempDriver = new();
-            Accident TempAcc = new Accident(TempDriver);
+            Driver TempTheAggrieved = new();
+            Accident TempAcc = new Accident(TempDriver,TempTheAggrieved);
             List<Accident> TempAccLocations_Obj = new List<Accident>();
             DataGridXaml.Items.Clear();
             for(int i=0;i<AllRecords.Count;i++)
@@ -202,7 +201,8 @@ namespace Car_Accident_Tracker
             string Driver_Name = DriverName_TB.Text;
 
             Driver TempDriver = new();
-            Accident TempAcc = new Accident(TempDriver);
+            Driver TempAggrieved = new();
+            Accident TempAcc = new Accident(TempDriver, TempAggrieved);
             List<Accident> TempDriverName_Obj = new List<Accident>();
             DataGridXaml.Items.Clear();
             for (int i = 0; i < AllRecords.Count; i++)
@@ -222,7 +222,8 @@ namespace Car_Accident_Tracker
             string Accident_Number = AccNumber_TB.Text;
 
             Driver TempDriver = new();
-            Accident TempAcc = new Accident(TempDriver);
+            Driver TempAggrieved = new();
+            Accident TempAcc = new Accident(TempDriver, TempAggrieved);
             //List<Accident> TempDriverName_Obj = new List<Accident>();
             DataGridXaml.Items.Clear();
             for (int i = 0; i < AllRecords.Count; i++)
@@ -233,6 +234,7 @@ namespace Car_Accident_Tracker
                     //TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
+                    MessageBox.Show(TempDisplayObj.NumOfDeath);
                     break;
                 }
             }

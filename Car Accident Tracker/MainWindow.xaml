@@ -43,15 +43,18 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Driver Name" Binding="{Binding DriverName}" Width="130"/>
-                <DataGridTextColumn Header="Phone Number" Binding="{Binding DriverPhoneNumber}" Width="130"/>
-                <DataGridTextColumn Header="License Number" Binding="{Binding DriverLicensesNumber}" Width="130"/>
-                <DataGridTextColumn Header="License Date" Binding="{Binding LicenseDate}" Width="130"/>
-                <DataGridTextColumn Header="Driver Age" Binding="{Binding DriverAge}" Width="130"/>
-                <DataGridTextColumn Header="Driver Email" Binding="{Binding DriverEmail}" Width="130"/>
-                <DataGridTextColumn Header="Driver Gender" Binding="{Binding DriverGender}" Width="130"/>
+                <DataGridTextColumn Header="Driver Name" Binding="{Binding DriverName}" Width="*"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding DriverPhoneNumber}" Width="*"/>
+                <DataGridTextColumn Header="License Number" Binding="{Binding DriverLicensesNumber}" Width="*"/>
+                <DataGridTextColumn Header="License Date" Binding="{Binding LicenseDate}" Width="*"/>
+                <DataGridTextColumn Header="Driver Age" Binding="{Binding DriverAge}" Width="*"/>
+                <DataGridTextColumn Header="Driver Email" Binding="{Binding DriverEmail}" Width="*"/>
+                <DataGridTextColumn Header="Driver Gender" Binding="{Binding DriverGender}" Width="*"/>
                 <DataGridTextColumn Header="Accident Location" Binding="{Binding AccidentLocation}" Width="*"/>
-                <DataGridTextColumn Header="Accident Number" Binding="{Binding AccidentNumber}" IsReadOnly="False" Width="*"/>
+                <DataGridTextColumn Header="Accident Number" Binding="{Binding AccidentNumber}" Width="*"/>
+                <DataGridTextColumn Header="Number of death" Binding="{Binding NumOfDeath}" Width="*"/>
+                <DataGridTextColumn Header="Accident Cause" Binding="{Binding AccidentCause}" Width="*"/>
+                <DataGridTextColumn Header="Aggrieved Name" Binding="{Binding TheAggrievedName}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
