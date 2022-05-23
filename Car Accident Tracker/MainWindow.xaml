@@ -7,39 +7,118 @@
         mc:Ignorable="d"
         Title="Car Accident Tracker" Height="542" Width="1317" Background="Gray" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+
+
     <Grid>
+        <Border >
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF8A0606" Offset="0"/>
+                    <GradientStop Color="#FF483D3D" Offset="0.6"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            
+
+        </Border>
         <TextBox x:Name="DriverName_TB" HorizontalAlignment="Left" 
-                  Margin="10,87,0,0" VerticalAlignment="Top" 
-                  Width="340" BorderBrush="#FFEAEAEA" 
-                  Foreground="#FF121010"/>
-        
-        <TextBlock HorizontalAlignment="Left" Margin="146,60,0,0"
+                  Margin="10,76,0,0" VerticalAlignment="Top" 
+                  Width="185" BorderBrush="#FFEAEAEA" 
+                  Foreground="#FF121010" Template="{StaticResource TextBoxBaseControlTemplate}" 
+                 Height="31" TextWrapping="Wrap" 
+                 MaxLines="1" MaxLength="20" IsReadOnly="False" 
+                 KeyDown="DriverName_TB_KeyDown"
+                 >
+            <TextBox.Effect>
+
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0"
                    TextWrapping="Wrap" Text="Driver Name"
-                   VerticalAlignment="Top" Width="68"/>
+                   VerticalAlignment="Top" Width="177" TextAlignment="Center"/>
 
         <TextBox x:Name="AccNumber_TB" HorizontalAlignment="Left" 
-                  Margin="423,87,0,0" VerticalAlignment="Top" Width="339"
-                    />
+                  Margin="200,76,0,0" VerticalAlignment="Top" Width="185"
+            Template="{StaticResource TextBoxBaseControlTemplate}" Height="31"
+                  KeyDown="AccNumber_TB_KeyDown">
+            <TextBox.Effect>
 
-        <TextBlock HorizontalAlignment="Left" Margin="543,60,0,0" 
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="200,55,0,0" 
                    TextWrapping="Wrap" Text="Accident Number" 
-                   VerticalAlignment="Top" Width="99"/>
+                   VerticalAlignment="Top" Width="177" TextAlignment="Center"
+                   >
+
+        </TextBlock>
 
 
         <TextBox x:Name="AccLocation_TB" HorizontalAlignment="Left" 
-                  Margin="805,87,0,0" VerticalAlignment="Top" Width="342"/>
+                  Margin="389,76,0,0" VerticalAlignment="Top" Width="184"
+                 Template="{StaticResource TextBoxBaseControlTemplate}" Height="31"
+                  KeyDown="AccLocation_TB_KeyDown">
+            <TextBox.Effect>
 
-        <TextBlock HorizontalAlignment="Left" Margin="927,60,0,0"
-                   TextWrapping="Wrap" Text="Accident Location" VerticalAlignment="Top" Width="98"/>
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="396,52,0,0"
+                   TextWrapping="Wrap" Text="Accident Location" VerticalAlignment="Top" Width="177" TextAlignment="Center"/>
 
         <DataGrid x:Name="DataGridXaml" Margin="10,142,10,26" >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="#FF790303"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2D0505" Offset="0"/>
+                    <GradientStop Color="#FFB99F9F" Offset="1"/>
+                </LinearGradientBrush>
+            </DataGrid.Background>
             <DataGrid.Resources >
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="Turquoise"/>
+                    <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="BorderThickness" Value="0,0,1,2"/>
                     <Setter Property="BorderBrush" Value="Black"/>
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Foreground" Value="DarkCyan"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -58,14 +137,122 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button x:Name="SearchBTN" Content="Search" Margin="1154,87,10,0" 
-                VerticalAlignment="Top" Height="22" Click="SearchBTN_Click"
+        <Button x:Name="SearchBTN" Content="Search" Margin="1154,63,10,0" 
+                VerticalAlignment="Top" Height="38" Click="SearchBTN_Click" Background="#FF713232"
                 
-                />
-        <Button x:Name="DisplayAllBTN" Content="Display All" Margin="1154,115,10,0" 
-            VerticalAlignment="Top" Height="22" Click="DisplayAllBTN_Click"
-                
-                />
+                >
+            <Button.Style>
+
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#FF373535"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF292827"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+
+
+            </Button.Resources>
+        </Button>
+        <Button x:Name="DisplayAllBTN" Content="Display All" Margin="1154,101,10,0" 
+            VerticalAlignment="Top" Height="36" Click="DisplayAllBTN_Click" Background="#FF713232"
+                >
+            <Button.Style>
+
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#FF373535"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF292827"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+
+
+            </Button.Resources>
+        </Button>
+        <TextBox x:Name="DriverGender_TB" HorizontalAlignment="Left" 
+            Margin="578,76,0,0" VerticalAlignment="Top" Width="183"
+                 Template="{StaticResource TextBoxBaseControlTemplate}" 
+                 Height="31" KeyDown="DriverGender_TB_KeyDown">
+            <TextBox.Effect>
+
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+
+        <TextBlock HorizontalAlignment="Left" Margin="586,52,0,0"
+            TextWrapping="Wrap" Text="Driver Gender" VerticalAlignment="Top" Width="175" TextAlignment="Center"/>
+
+
+        <TextBox x:Name="NumberOfDeath_TB" HorizontalAlignment="Left" 
+            Margin="767,76,0,0" VerticalAlignment="Top" Width="184"
+                 Template="{StaticResource TextBoxBaseControlTemplate}"
+                 Height="31" KeyDown="NumberOfDeath_TB_KeyDown">
+            <TextBox.Effect>
+
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="770,52,0,0"
+            TextWrapping="Wrap" Text="Number of Death" VerticalAlignment="Top" Width="178" TextAlignment="Center"/>
+
+
+        <TextBox x:Name="AccidentCause_TB" HorizontalAlignment="Left" 
+            Margin="961,76,0,0" VerticalAlignment="Top" Width="184"
+                 Template="{StaticResource TextBoxBaseControlTemplate}"
+                 Height="31" KeyDown="AccidentCause_TB_KeyDown">
+            <TextBox.Effect>
+
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="995,52,0,0"
+            TextWrapping="Wrap" Text="Accident Cause" VerticalAlignment="Top" Width="116" TextAlignment="Center"/>
 
     </Grid>
 </Window>

@@ -33,7 +33,6 @@ namespace Car_Accident_Tracker
             ReadDrivers();
             ReadLocations();
             ReadAccidentsNumbers();
-            
         }
 
         List<ObjectToDisplay> AllRecords = new List<ObjectToDisplay>();
@@ -56,7 +55,10 @@ namespace Car_Accident_Tracker
         {
             //SearchByLocation();
             //SearchByDriverName();
-            SearchByAccidentNumber();
+            //SearchByAccidentNumber();
+            //SearchByDriverGender();
+            //SearchByNumberOfDeath();
+            SearchByAccidentCause();
         }
 
         public void LoadAllAccidents()
@@ -234,11 +236,116 @@ namespace Car_Accident_Tracker
                     //TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
-                    MessageBox.Show(TempDisplayObj.NumOfDeath);
                     break;
                 }
             }
         }
 
+        public void SearchByDriverGender()
+        {
+            string _DriverGender = DriverGender_TB.Text;
+
+            Driver TempDriver = new();
+            Driver TempAggrieved = new();
+            Accident TempAcc = new Accident(TempDriver, TempAggrieved);
+            DataGridXaml.Items.Clear();
+            for (int i = 0; i < AllRecords.Count; i++)
+            {
+                TempAcc = AllAcc[i];
+                if (TempAcc.getAccidentDriver().DriverGender == _DriverGender)
+                {
+                    //TempDriverName_Obj.Add(TempAcc);
+                    ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
+                    DataGridXaml.Items.Add(TempDisplayObj);
+                }
+            }
+        }
+
+        public void SearchByNumberOfDeath()
+        {
+            string _NumberOfDeath = NumberOfDeath_TB.Text;
+
+            Driver TempDriver = new();
+            Driver TempAggrieved = new();
+            Accident TempAcc = new Accident(TempDriver, TempAggrieved);
+            DataGridXaml.Items.Clear();
+            for (int i = 0; i < AllRecords.Count; i++)
+            {
+                TempAcc = AllAcc[i];
+                if (TempAcc.NumberOfDeath == _NumberOfDeath)
+                {
+                    //TempDriverName_Obj.Add(TempAcc);
+                    ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
+                    DataGridXaml.Items.Add(TempDisplayObj);
+                }
+            }
+        }
+        public void SearchByAccidentCause()
+        {
+            string _AccidentCause = AccidentCause_TB.Text;
+
+            Driver TempDriver = new();
+            Driver TempAggrieved = new();
+            Accident TempAcc = new Accident(TempDriver, TempAggrieved);
+            DataGridXaml.Items.Clear();
+            for (int i = 0; i < AllRecords.Count; i++)
+            {
+                TempAcc = AllAcc[i];
+                if (TempAcc._AccidentCause == _AccidentCause)
+                {
+                    //TempDriverName_Obj.Add(TempAcc);
+                    ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
+                    DataGridXaml.Items.Add(TempDisplayObj);
+                }
+            }
+        }
+
+        private void DriverName_TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return)
+            {
+                SearchByDriverName();
+            }
+        }
+
+        private void AccNumber_TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SearchByAccidentNumber();
+            }
+        }
+
+        private void AccLocation_TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SearchByLocation();
+            }
+        }
+
+        private void DriverGender_TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SearchByDriverGender();
+            }
+        }
+
+        private void NumberOfDeath_TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SearchByNumberOfDeath();
+            }
+        }
+
+        private void AccidentCause_TB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SearchByAccidentCause();
+            }
+        }
     }
 }
