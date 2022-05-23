@@ -35,8 +35,8 @@
         <Border >
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FF8A0606" Offset="0"/>
-                    <GradientStop Color="#FF483D3D" Offset="0.6"/>
+                    <GradientStop Color="#5400FF" Offset="0"/>
+                    <GradientStop Color="#D409E3" Offset="0.6"/>
                 </LinearGradientBrush>
             </Border.Background>
             
@@ -103,13 +103,13 @@
         <DataGrid x:Name="DataGridXaml" Margin="10,142,10,26" >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-                    <Setter Property="Background" Value="#FF790303"/>
+                    <Setter Property="Background" Value="#D700FA"/>
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FF2D0505" Offset="0"/>
-                    <GradientStop Color="#FFB99F9F" Offset="1"/>
+                    <GradientStop Color="#5400FF" Offset="0"/>
+                    <GradientStop Color="#D409E3" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Resources >
