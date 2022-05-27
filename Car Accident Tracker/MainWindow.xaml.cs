@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 
 
@@ -27,7 +29,7 @@ namespace Car_Accident_Tracker
         public MainWindow()
         {
             InitializeComponent();
-            LoadAllAccidents();
+            //LoadAllAccidents();
             ReadData();
             DisplayFirstTenRows();
             ReadDrivers();
@@ -61,11 +63,11 @@ namespace Car_Accident_Tracker
             SearchByAccidentCause();
         }
 
-        public void LoadAllAccidents()
-        {
-            AccLocation_TB.Text = "";
+        //public void LoadAllAccidents()
+        //{
+        //    AccLocation_TB.Text = "";
 
-        }
+        //}
         
         public void DisplayFirstTenRows()
         {

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Car_Accident_Tracker"
+        
         mc:Ignorable="d"
         Title="Car Accident Tracker" Height="542" Width="1317" Background="Gray" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen">
@@ -35,8 +36,8 @@
         <Border >
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#5400FF" Offset="0"/>
-                    <GradientStop Color="#D409E3" Offset="0.6"/>
+                    <GradientStop Color="Gray" Offset="0"/>
+                    <GradientStop Color="DarkGray" Offset="0.6"/>
                 </LinearGradientBrush>
             </Border.Background>
             
@@ -103,13 +104,13 @@
         <DataGrid x:Name="DataGridXaml" Margin="10,142,10,26" >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-                    <Setter Property="Background" Value="#D700FA"/>
+                    <Setter Property="Background" Value="#FFBBB3B3"/>
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#5400FF" Offset="0"/>
-                    <GradientStop Color="#D409E3" Offset="1"/>
+                    <GradientStop Color="Gray" Offset="0"/>
+                    <GradientStop Color="DarkGray" Offset="0.6"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Resources >
@@ -138,13 +139,13 @@
         </DataGrid>
 
         <Button x:Name="SearchBTN" Content="Search" Margin="1154,63,10,0" 
-                VerticalAlignment="Top" Height="38" Click="SearchBTN_Click" Background="#FF713232"
+                VerticalAlignment="Top" Height="38" Click="SearchBTN_Click" 
                 
                 >
             <Button.Style>
 
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="#FF373535"/>
+                    <Setter Property="Background" Value="#FFAB5757"/>
 
                     <Setter Property="Template">
                         <Setter.Value>
@@ -157,7 +158,7 @@
                     </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FF292827"/>
+                            <Setter Property="Background" Value="#FF4A433D"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -171,12 +172,12 @@
             </Button.Resources>
         </Button>
         <Button x:Name="DisplayAllBTN" Content="Display All" Margin="1154,101,10,0" 
-            VerticalAlignment="Top" Height="36" Click="DisplayAllBTN_Click" Background="#FF713232"
+            VerticalAlignment="Top" Height="36" Click="DisplayAllBTN_Click" 
                 >
             <Button.Style>
 
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="#FF373535"/>
+                    <Setter Property="Background" Value="#FFAB5757"/>
 
                     <Setter Property="Template">
                         <Setter.Value>

@@ -9,7 +9,7 @@ namespace Car_Accident_Tracker
 {
     public class Accident
     {
-        
+        static string AccidentID;
         public string AccidentLocation { get; set; }
         public string AccidentNumber { get; set; }
         public string NumberOfDeath {get; set; }
