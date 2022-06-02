@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.IO;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.Data.SqlClient;
+using System.Data;
 
 
 
@@ -51,6 +53,12 @@ namespace Car_Accident_Tracker
             }
         }
 
+        void ConnectToDataBase()
+        {
+            string connectionString = @"Data Source=ELSHENNAWY\SQLEXPRESS;Integrated Security=True;" +
+                "Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;" +
+                "ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        }
         
         
         private void SearchBTN_Click(object sender, RoutedEventArgs e)
@@ -348,6 +356,12 @@ namespace Car_Accident_Tracker
             {
                 SearchByAccidentCause();
             }
+        }
+
+        private void VisualsBTN_Click(object sender, RoutedEventArgs e)
+        {
+            AnalyzeWindow analyzeWindow = new AnalyzeWindow();
+            analyzeWindow.Show();
         }
     }
 }

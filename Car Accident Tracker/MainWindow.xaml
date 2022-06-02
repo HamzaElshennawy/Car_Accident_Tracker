@@ -6,8 +6,16 @@
         xmlns:local="clr-namespace:Car_Accident_Tracker"
         
         mc:Ignorable="d"
-        Title="Car Accident Tracker" Height="542" Width="1317" Background="Gray" ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen">
+        Title="Car Accident Tracker" Height="542" Width="1317" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
@@ -33,14 +41,22 @@
 
 
     <Grid>
-        <Border >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1118*"/>
+            <ColumnDefinition Width="199*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="Visuals" Margin="909,124,0,370" Grid.ColumnSpan="2" />
+
+
+        <Border Grid.ColumnSpan="2" >
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="Gray" Offset="0"/>
                     <GradientStop Color="DarkGray" Offset="0.6"/>
                 </LinearGradientBrush>
             </Border.Background>
-            
+
 
         </Border>
         <TextBox x:Name="DriverName_TB" HorizontalAlignment="Left" 
@@ -62,7 +78,7 @@
 
         <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0"
                    TextWrapping="Wrap" Text="Driver Name"
-                   VerticalAlignment="Top" Width="177" TextAlignment="Center"/>
+                   VerticalAlignment="Top" Width="177" TextAlignment="Center" Height="14"/>
 
         <TextBox x:Name="AccNumber_TB" HorizontalAlignment="Left" 
                   Margin="200,76,0,0" VerticalAlignment="Top" Width="185"
@@ -79,7 +95,7 @@
 
         <TextBlock HorizontalAlignment="Left" Margin="200,55,0,0" 
                    TextWrapping="Wrap" Text="Accident Number" 
-                   VerticalAlignment="Top" Width="177" TextAlignment="Center"
+                   VerticalAlignment="Top" Width="177" TextAlignment="Center" Height="14"
                    >
 
         </TextBlock>
@@ -99,9 +115,9 @@
         </TextBox>
 
         <TextBlock HorizontalAlignment="Left" Margin="396,52,0,0"
-                   TextWrapping="Wrap" Text="Accident Location" VerticalAlignment="Top" Width="177" TextAlignment="Center"/>
+                   TextWrapping="Wrap" Text="Accident Location" VerticalAlignment="Top" Width="177" TextAlignment="Center" Height="14"/>
 
-        <DataGrid x:Name="DataGridXaml" Margin="10,142,10,26" >
+        <DataGrid x:Name="DataGridXaml" Margin="10,142,10,26" FontFamily="Times New Roman" FontSize="12" BorderThickness="1,1,1,1" SnapsToDevicePixels="True" Grid.ColumnSpan="2" >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Background" Value="#FFBBB3B3"/>
@@ -138,8 +154,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button x:Name="SearchBTN" Content="Search" Margin="1154,63,10,0" 
-                VerticalAlignment="Top" Height="38" Click="SearchBTN_Click" 
+        <Button x:Name="SearchBTN" Content="Search" Margin="41,59,10,0" 
+                VerticalAlignment="Top" Height="38" Click="SearchBTN_Click" Grid.Column="1" 
                 
                 >
             <Button.Style>
@@ -171,8 +187,8 @@
 
             </Button.Resources>
         </Button>
-        <Button x:Name="DisplayAllBTN" Content="Display All" Margin="1154,101,10,0" 
-            VerticalAlignment="Top" Height="36" Click="DisplayAllBTN_Click" 
+        <Button x:Name="DisplayAllBTN" Content="Display All" Margin="41,100,10,0" 
+            VerticalAlignment="Top" Height="36" Click="DisplayAllBTN_Click" Grid.Column="1" 
                 >
             <Button.Style>
 
@@ -217,7 +233,7 @@
         </TextBox>
 
         <TextBlock HorizontalAlignment="Left" Margin="586,52,0,0"
-            TextWrapping="Wrap" Text="Driver Gender" VerticalAlignment="Top" Width="175" TextAlignment="Center"/>
+            TextWrapping="Wrap" Text="Driver Gender" VerticalAlignment="Top" Width="175" TextAlignment="Center" Height="14"/>
 
 
         <TextBox x:Name="NumberOfDeath_TB" HorizontalAlignment="Left" 
@@ -235,13 +251,13 @@
 
 
         <TextBlock HorizontalAlignment="Left" Margin="770,52,0,0"
-            TextWrapping="Wrap" Text="Number of Death" VerticalAlignment="Top" Width="178" TextAlignment="Center"/>
+            TextWrapping="Wrap" Text="Number of Death" VerticalAlignment="Top" Width="178" TextAlignment="Center" Height="14"/>
 
 
         <TextBox x:Name="AccidentCause_TB" HorizontalAlignment="Left" 
             Margin="961,76,0,0" VerticalAlignment="Top" Width="184"
                  Template="{StaticResource TextBoxBaseControlTemplate}"
-                 Height="31" KeyDown="AccidentCause_TB_KeyDown">
+                 Height="31" KeyDown="AccidentCause_TB_KeyDown" Grid.ColumnSpan="2">
             <TextBox.Effect>
 
                 <DropShadowEffect  BlurRadius="10"
@@ -253,7 +269,40 @@
 
 
         <TextBlock HorizontalAlignment="Left" Margin="995,52,0,0"
-            TextWrapping="Wrap" Text="Accident Cause" VerticalAlignment="Top" Width="116" TextAlignment="Center"/>
+            TextWrapping="Wrap" Text="Accident Cause" VerticalAlignment="Top" Width="116" TextAlignment="Center" Height="14"/>
+        <Button x:Name="VisualsBTN" Content="Analyze Accidents" Margin="41,19,10,0" 
+            VerticalAlignment="Top" Height="38"  Grid.Column="1" 
+                Click="VisualsBTN_Click"
+                >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+
+
+            </Button.Resources>
+            <Button.Style>
+
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFAB5757"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4A433D"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </Window>
