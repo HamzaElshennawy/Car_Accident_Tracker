@@ -17,6 +17,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlTypes;
 
 
 
@@ -31,6 +32,7 @@ namespace Car_Accident_Tracker
         public MainWindow()
         {
             InitializeComponent();
+            ConnectToDataBase();
             //LoadAllAccidents();
             ReadData();
             DisplayFirstTenRows();
@@ -55,9 +57,30 @@ namespace Car_Accident_Tracker
 
         void ConnectToDataBase()
         {
-            string connectionString = @"Data Source=ELSHENNAWY\SQLEXPRESS;Integrated Security=True;" +
-                "Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;" +
-                "ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            DataTable dtAcc = new DataTable();
+
+            Driver tempDriver = new();
+            Driver TempDamaged = new();
+            Accident tempAccident = new Accident(tempDriver, TempDamaged);
+
+            
+
+
+
+
+
+            string connectionStringForAccident = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
+            SqlConnection conAcc = new SqlConnection(connectionStringForAccident);
+            SqlDataAdapter dataAdapterAccident = new SqlDataAdapter("Select * from Accident",conAcc);
+            
+            dataAdapterAccident.Fill(dtAcc);
+            
+            foreach (DataRow row in dtAcc.Rows)
+            {
+                string Data = row["AccidentNumber"].ToString();
+                MessageBox.Show(Data);      
+            }
+            
         }
         
         
