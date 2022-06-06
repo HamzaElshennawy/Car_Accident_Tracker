@@ -164,11 +164,7 @@ namespace Car_Accident_Tracker
             SearchByAccidentCause();
         }
 
-        //public void LoadAllAccidents()
-        //{
-        //    AccLocation_TB.Text = "";
-
-        //}
+        
         
         public void DisplayFirstTenRows()
         {
@@ -255,10 +251,9 @@ namespace Car_Accident_Tracker
                 if (!Locations.Contains(TempLocation))
                 {
                     Locations.Add(TempLocation);
-                    //DriverName_CB.Items.Add(TempDriverName);
                 }
             }
-            //AccLocation_TB.Text = Locations;
+            
         }
         public void ReadAccidentsNumbers()
         {
@@ -276,10 +271,8 @@ namespace Car_Accident_Tracker
                 if (!Accidents.Contains(TempAccidentNumber))
                 {
                     Accidents.Add(TempAccidentNumber);
-                    //DriverName_CB.Items.Add(TempDriverName);
                 }
             }
-            //AccNumber_TB.Text = Accidents;
         }
         public void SearchByLocation()
         {
@@ -329,14 +322,12 @@ namespace Car_Accident_Tracker
             Driver TempDriver = new();
             Driver TempAggrieved = new();
             Accident TempAcc = new Accident(TempDriver, TempAggrieved);
-            //List<Accident> TempDriverName_Obj = new List<Accident>();
             DataGridXaml.Items.Clear();
             for (int i = 0; i < AllRecords.Count; i++)
             {
                 TempAcc = AllAcc[i];
                 if (TempAcc.getAccidentNumber() == Accident_Number)
                 {
-                    //TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
                     break;
@@ -357,7 +348,6 @@ namespace Car_Accident_Tracker
                 TempAcc = AllAcc[i];
                 if (TempAcc.getAccidentDriver().DriverGender == _DriverGender)
                 {
-                    //TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
                 }
@@ -377,7 +367,6 @@ namespace Car_Accident_Tracker
                 TempAcc = AllAcc[i];
                 if (TempAcc.NumberOfDeath == _NumberOfDeath)
                 {
-                    //TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
                 }
@@ -396,7 +385,6 @@ namespace Car_Accident_Tracker
                 TempAcc = AllAcc[i];
                 if (TempAcc._AccidentCause == _AccidentCause)
                 {
-                    //TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
                 }
