@@ -19,7 +19,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Data.SqlTypes;
 
-
+#pragma warning disable CS8601 // Possible null reference assignment.
 
 
 namespace Car_Accident_Tracker
@@ -34,11 +34,11 @@ namespace Car_Accident_Tracker
             InitializeComponent();
             ConnectToDataBase();
             //LoadAllAccidents();
-            ReadData();
-            DisplayFirstTenRows();
-            ReadDrivers();
-            ReadLocations();
-            ReadAccidentsNumbers();
+            //ReadData();
+            //DisplayFirstTenRows();
+            //ReadDrivers();
+            //ReadLocations();
+            //ReadAccidentsNumbers();
         }
 
         List<ObjectToDisplay> AllRecords = new List<ObjectToDisplay>();
@@ -58,15 +58,48 @@ namespace Car_Accident_Tracker
         void ConnectToDataBase()
         {
             DataTable dtAcc = new DataTable();
-
-            Driver tempDriver = new();
-            Driver TempDamaged = new();
-            Accident tempAccident = new Accident(tempDriver, TempDamaged);
-
+            DataTable dtDri = new DataTable();
             
 
 
 
+            List<Driver> drivers = new List<Driver>();
+
+
+            //Drivers Table
+            
+            
+            string connectionStringForDrivers = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
+            SqlConnection conDri = new SqlConnection(connectionStringForDrivers);
+            SqlDataAdapter dataAdapterDrivers = new SqlDataAdapter("Select * from DriverInfo", conDri);
+
+            dataAdapterDrivers.Fill(dtDri);
+
+
+
+
+            foreach (DataRow row in dtDri.Rows)
+            {
+                Driver TempDriver = new();
+                TempDriver.DriverID = row["DriverID"].ToString();
+                TempDriver.DriverName = row["DriverName"].ToString();
+                TempDriver.DriverPhoneNumber = row["DriverPhoneNumber"].ToString();
+                TempDriver.DriverLicensesNumber = row["DriverLicensesNumber"].ToString();
+                TempDriver.LicenseDate = row["LicenseDate"].ToString();
+                TempDriver.DriverAge = row["DriverAge"].ToString();
+                TempDriver.DriverEmail = row["DriverEmail"].ToString();
+                TempDriver.DriverGender = row["DriverGender"].ToString();
+
+                drivers.Add(TempDriver);
+
+                
+            }
+
+
+
+
+
+            //Accidents Table
 
 
             string connectionStringForAccident = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
@@ -77,10 +110,47 @@ namespace Car_Accident_Tracker
             
             foreach (DataRow row in dtAcc.Rows)
             {
-                string Data = row["AccidentNumber"].ToString();
-                MessageBox.Show(Data);      
+                string driverID;
+                string _theAggrieved;
+
+                Driver tempDriver = new();
+                Driver TempDamaged = new();
+
+                driverID = row["DriverID"].ToString();
+                _theAggrieved = row["TheAggrieved"].ToString();
+
+
+                bool driverFound = false;
+                bool theAggrievedFound = false;
+
+                int i = 0;
+
+                while(driverFound==false || theAggrievedFound==false || i < drivers.Count)
+                {
+                    
+                    if (driverID == drivers[i].DriverID)
+                    {
+                        tempDriver = drivers[i];
+                        driverFound = true;
+                    }
+                    if (drivers[i].DriverID == _theAggrieved)
+                    {
+                        TempDamaged = drivers[i];
+                        theAggrievedFound = true;
+                    }
+                    i++;
+                }
+                Accident tempAccident = new Accident(tempDriver, TempDamaged);
+
+                tempAccident.AccidentNumber = row["AccidentNumber"].ToString();
+                tempAccident.NumberOfDeath = row["NumberOfDeath"].ToString();
+                tempAccident.AccidentLocation = row["AccidentLocation"].ToString();
+                tempAccident._AccidentCause = row["AccidentCause"].ToString();
+
+                ObjectToDisplay tempObj = new ObjectToDisplay(tempAccident);
+                DataGridXaml.Items.Add(tempObj);
             }
-            
+
         }
         
         
@@ -388,3 +458,6 @@ namespace Car_Accident_Tracker
         }
     }
 }
+
+
+#pragma warning restore CS8601 // Possible null reference assignment.

@@ -8,7 +8,7 @@ namespace Car_Accident_Tracker
 {
     public class Driver
     {
-        static string DriverID;
+        public string DriverID;
         public string DriverName { set; get;}
         public string DriverPhoneNumber { set; get; }
         public string DriverLicensesNumber { set; get; }
