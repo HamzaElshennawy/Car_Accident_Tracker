@@ -41,10 +41,13 @@ namespace Car_Accident_Tracker
             //ReadAccidentsNumbers();
         }
 
-        List<ObjectToDisplay> AllRecords = new List<ObjectToDisplay>();
+        public List<ObjectToDisplay> AllRecords = new List<ObjectToDisplay>();
         List<Driver> DriversNames = new List<Driver>();
         List<Accident> AllAcc = new List<Accident>();
         List<string> AllLocations = new List<string>();
+        List<string> SearchContent = new List<string>();
+
+
         private void DisplayAllBTN_Click(object sender, RoutedEventArgs e)
         {
             ReadData();
@@ -55,28 +58,21 @@ namespace Car_Accident_Tracker
             }
         }
 
-        void ConnectToDataBase()
+        public void ConnectToDataBase()
         {
             DataTable dtAcc = new DataTable();
             DataTable dtDri = new DataTable();
             
-
-
-
             List<Driver> drivers = new List<Driver>();
 
 
+
+
             //Drivers Table
-            
-            
             string connectionStringForDrivers = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
             SqlConnection conDri = new SqlConnection(connectionStringForDrivers);
             SqlDataAdapter dataAdapterDrivers = new SqlDataAdapter("Select * from DriverInfo", conDri);
-
             dataAdapterDrivers.Fill(dtDri);
-
-
-
 
             foreach (DataRow row in dtDri.Rows)
             {
@@ -95,15 +91,11 @@ namespace Car_Accident_Tracker
                 
             }
 
-
-
-
-
             //Accidents Table
-
 
             string connectionStringForAccident = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
             SqlConnection conAcc = new SqlConnection(connectionStringForAccident);
+            
             SqlDataAdapter dataAdapterAccident = new SqlDataAdapter("Select * from Accident",conAcc);
             
             dataAdapterAccident.Fill(dtAcc);
@@ -153,7 +145,6 @@ namespace Car_Accident_Tracker
 
         }
         
-        
         private void SearchBTN_Click(object sender, RoutedEventArgs e)
         {
             //SearchByLocation();
@@ -164,8 +155,6 @@ namespace Car_Accident_Tracker
             SearchByAccidentCause();
         }
 
-        
-        
         public void DisplayFirstTenRows()
         {
             DataGridXaml.Items.Clear();
@@ -233,8 +222,6 @@ namespace Car_Accident_Tracker
             //DriverName_CB.ItemsSource = Names;
         }
 
-        
-        
         public void ReadLocations()
         {
             Driver TempDriver = new();
@@ -311,6 +298,7 @@ namespace Car_Accident_Tracker
                     TempDriverName_Obj.Add(TempAcc);
                     ObjectToDisplay TempDisplayObj = new ObjectToDisplay(TempAcc);
                     DataGridXaml.Items.Add(TempDisplayObj);
+                    //SearchContent.Add(TempDisplayObj);
                 }
             }
         }
@@ -443,6 +431,38 @@ namespace Car_Accident_Tracker
         {
             AnalyzeWindow analyzeWindow = new AnalyzeWindow();
             analyzeWindow.Show();
+        }
+
+        void SearchWithTextBoxs()
+        {
+            
+            if(!string.IsNullOrEmpty(DriverName_TB.Text))
+            {
+                if(!SearchContent.Contains(DriverName_TB.Text))
+                {
+                    SearchContent.Add(DriverName_TB.Text);
+                }
+            }
+            if(!string.IsNullOrEmpty(AccNumber_TB.Text))
+            {
+                if(!SearchContent.Contains(AccNumber_TB.Text))
+                {
+                    SearchContent.Add(AccNumber_TB.Text);
+                }
+            }
+            Driver TempDriver = new();
+            Driver TempAgg = new();
+
+            Accident TempAcc = new Accident(TempDriver, TempAgg);
+
+            for(int i = 0; i < AllRecords.Count; i++)
+            {
+                TempAcc = AllAcc[i];
+
+
+                
+
+            }
         }
     }
 }

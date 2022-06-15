@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +13,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using LiveCharts;
-using LiveCharts.Wpf;
+
+
+#pragma warning disable CS8601 // Possible null reference assignment.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+
 
 namespace Car_Accident_Tracker
 {
@@ -21,49 +26,109 @@ namespace Car_Accident_Tracker
     /// </summary>
     public partial class AnalyzeWindow : Window
     {
-        //public class driver
-        //{
-        //    public string Name { get; set; }
-        //    public int Share { get; set; }
-        //}
-        class DriverCollection : System.Collections.ObjectModel.Collection<Driver>
-        {
-            public DriverCollection()
-            {
-                Add(new Driver { DriverName = "Mango", DriverAge = "10" });
-                Add(new Driver { DriverName = "Mango", DriverAge = "10" });
-                Add(new Driver { DriverName = "Mango", DriverAge = "10" });
-                
-            }
-        }
         public AnalyzeWindow()
         {
             InitializeComponent();
-            PointLabel = chartPoint =>
-                    string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
-            var Gender = "Hamza";
-            
 
-            DataContext = this;
         }
-
-        public Func<ChartPoint, string> PointLabel { get; set; }
-
-        private void Chart_OnDataClick(object sender, ChartPoint chartpoint)
+        public void ConnectToDataBase()
         {
-            var chart = (LiveCharts.Wpf.PieChart)chartpoint.ChartView;
+            DataTable dtAcc = new DataTable();
+            DataTable dtDri = new DataTable();
 
-            //clear selected slice.
-            foreach (PieSeries series in chart.Series)
-                series.PushOut = 0;
+            List<Driver> drivers = new List<Driver>();
 
-            var selectedSeries = (PieSeries)chartpoint.SeriesView;
-            selectedSeries.PushOut = 8;
+//string query = "SELECT ";
+
+
+            //if (!string.IsNullOrEmpty(DriverName_TB.Text))
+            //{
+            //    query += "";
+            //}
+            //if (!string.IsNullOrEmpty(DriverGender_TB.Text))
+            //{
+
+            //}
+
+
+            //Drivers Table
+            string connectionStringForDrivers = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
+            SqlConnection conDri = new SqlConnection(connectionStringForDrivers);
+            SqlDataAdapter dataAdapterDrivers = new SqlDataAdapter("Select * from DriverInfo", conDri);
+            dataAdapterDrivers.Fill(dtDri);
+
+            foreach (DataRow row in dtDri.Rows)
+            {
+                Driver TempDriver = new();
+
+                TempDriver.DriverID = row["DriverID"].ToString();
+
+                TempDriver.DriverName = row["DriverName"].ToString();
+                TempDriver.DriverPhoneNumber = row["DriverPhoneNumber"].ToString();
+                TempDriver.DriverLicensesNumber = row["DriverLicensesNumber"].ToString();
+                TempDriver.LicenseDate = row["LicenseDate"].ToString();
+                TempDriver.DriverAge = row["DriverAge"].ToString();
+                TempDriver.DriverEmail = row["DriverEmail"].ToString();
+                TempDriver.DriverGender = row["DriverGender"].ToString();
+
+                drivers.Add(TempDriver);
+
+
+            }
+
+            //Accidents Table
+
+            string connectionStringForAccident = @"Data Source=ELSHENNAWY\SQLEXPRESS;Initial Catalog=CarsAccident;Integrated Security=True";
+            SqlConnection conAcc = new SqlConnection(connectionStringForAccident);
+
+            SqlDataAdapter dataAdapterAccident = new SqlDataAdapter("Select  from Accident", conAcc);
+
+            dataAdapterAccident.Fill(dtAcc);
+
+            foreach (DataRow row in dtAcc.Rows)
+            {
+                string driverID;
+                string _theAggrieved;
+
+                Driver tempDriver = new();
+                Driver TempDamaged = new();
+
+
+                driverID = row["DriverID"].ToString();
+                _theAggrieved = row["TheAggrieved"].ToString();
+
+                bool driverFound = false;
+                bool theAggrievedFound = false;
+
+                int i = 0;
+
+                while (driverFound == false || theAggrievedFound == false || i < drivers.Count)
+                {
+
+                    if (driverID == drivers[i].DriverID)
+                    {
+                        tempDriver = drivers[i];
+                        driverFound = true;
+                    }
+                    if (drivers[i].DriverID == _theAggrieved)
+                    {
+                        TempDamaged = drivers[i];
+                        theAggrievedFound = true;
+                    }
+                    i++;
+                }
+                Accident tempAccident = new Accident(tempDriver, TempDamaged);
+
+                tempAccident.AccidentNumber = row["AccidentNumber"].ToString();
+                tempAccident.NumberOfDeath = row["NumberOfDeath"].ToString();
+                tempAccident.AccidentLocation = row["AccidentLocation"].ToString();
+                tempAccident._AccidentCause = row["AccidentCause"].ToString();
+
+                ObjectToDisplay tempObj = new ObjectToDisplay(tempAccident);
+                
+            }
+
         }
 
-        private void Chart1_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }

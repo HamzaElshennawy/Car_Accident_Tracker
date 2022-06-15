@@ -6,6 +6,13 @@
     <RootNamespace>Car_Accident_Tracker</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <StartupObject>Car_Accident_Tracker.App</StartupObject>
+    <PlatformTarget>x64</PlatformTarget>
+    <Version>$(VersionPrefix)1.5</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

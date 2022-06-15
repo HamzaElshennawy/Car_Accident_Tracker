@@ -1,0 +1,191 @@
+﻿<Window x:Class="Car_Accident_Tracker.LogingScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Car_Accident_Tracker"
+        mc:Ignorable="d"
+        Title="CAT" Height="583" Width="1044">
+
+
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="PassBoxBaseControlTemplate" TargetType="{x:Type PasswordBox}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Border >
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#000" Offset="0"/>
+                    <GradientStop Color="#FFF" Offset="1.3"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Label Content="Label"/>
+
+        </Border>
+        <Label Content="Car Accident Tracker" 
+               HorizontalAlignment="Left" 
+               Margin="268,15,0,0" 
+               VerticalAlignment="Top" 
+               Height="91" 
+               Width="534" Foreground="White" FontSize="54"
+               >
+            <Label.Effect>
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
+            </Label.Effect>
+        </Label>
+
+
+
+        <Button x:Name="LoginBTN"
+                Content="Login"
+                
+                Margin="431,478,355,0"
+                VerticalAlignment="Top" Height="60" 
+                Foreground="Wheat" FontSize="25" 
+                HorizontalContentAlignment="Center" 
+                FontFamily="Cascadia Mono ExtraLight" Click="LoginBTN_Click">
+
+
+
+            <Button.Style>
+
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#FF373535"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF292827"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+
+
+            </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </Button.Effect>
+
+        </Button>
+        <Button x:Name="CloseBTN"
+                Margin="1011,0,0,566"
+                Background="#00DDDDDD"
+                BorderThickness="0" >
+
+
+
+        </Button>
+
+        <TextBox x:Name="EmailTBox" Template="{StaticResource TextBoxBaseControlTemplate}"
+                 HorizontalAlignment="Left"
+                 Margin="420,300,0,0"
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="303" Height="28" FontFamily="Cascadia Mono ExtraLight" Background="#FF716C6C"
+                 BorderThickness="1" MaxLength="50" MaxLines="1" IsUndoEnabled="False" FontSize="18" TextAlignment="Left"
+                 >
+            <TextBox.Effect>
+
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label x:Name="Emailbl" Content="E-Mail" HorizontalAlignment="Left" Margin="295,299,0,0" VerticalAlignment="Top" Width="86" Height="32" FontFamily="Cascadia Code SemiLight" FontSize="20">
+            <Label.Effect>
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </Label.Effect>
+        </Label>
+        <PasswordBox x:Name="PassTBox" Template="{StaticResource PassBoxBaseControlTemplate}"
+            HorizontalAlignment="Left"
+            Margin="420,348,0,0"
+            VerticalAlignment="Top" 
+            Width="303" Height="30" 
+            Background="#FF716C6C"
+            BorderThickness="1" MaxLength="50" FontSize="18">
+            <PasswordBox.Effect>
+
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+
+            </PasswordBox.Effect>
+        </PasswordBox>
+        <Label x:Name="Passlbl" Content="Password" HorizontalAlignment="Left" Margin="295,346,0,0" VerticalAlignment="Top" Width="112" Height="32" FontFamily="Cascadia Code SemiLight" FontSize="20">
+            <Label.Effect>
+                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="#FF373535"/>
+            </Label.Effect>
+        </Label>
+        <Label x:Name="Incorrectlbl" Content="Incorrect username or password" HorizontalAlignment="Left" Margin="490,268,0,305" Width="242" Foreground="#FFA50C0C" FontFamily="Cascadia Code ExtraLight"/>
+    </Grid>
+
+
+</Window>

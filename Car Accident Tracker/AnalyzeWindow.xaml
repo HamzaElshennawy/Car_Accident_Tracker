@@ -5,19 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Car_Accident_Tracker"
         mc:Ignorable="d"
-        Title="Car Accident Tracker" Height="542" Width="900" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignCardBackground}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
-
+        Title="AnalyzeWindow" Height="300" Width="350">
     <Grid>
-        <Grid.Resources>
-            <local:Driver x:Key="DriverCollection" />
-        </Grid.Resources>
+        <ComboBox HorizontalAlignment="Left" Margin="22,0,0,0" Width="150"
+                   />
+        <ComboBox HorizontalAlignment="Left" Margin="175,0,0,0" Width="150"/>
+        <TextBlock HorizontalAlignment="Left" Margin="37,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontFamily="Times New Roman" FontSize="15" TextAlignment="Center" Text="Analyze 1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="190,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontFamily="Times New Roman" FontSize="15" TextAlignment="Center" Text="Analyze 2"/>
+        <Button Content="Analyze" HorizontalAlignment="Center" Margin="0,216,0,0" VerticalAlignment="Top" Width="166"/>
+
     </Grid>
 </Window>

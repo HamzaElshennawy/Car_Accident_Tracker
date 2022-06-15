@@ -13,5 +13,26 @@ namespace Car_Accident_Tracker
     /// </summary>
     public partial class App : Application
     {
+        private void ApplicationStart(object sender, StartupEventArgs e)
+        {
+            //Disable shutdown when the dialog closes
+            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            var dialog = new LogingScreen();
+
+            if (dialog.ShowDialog() == true)
+            {
+                var mainWindow = new MainWindow();
+                //Re-enable normal shutdown mode.
+                Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                Current.MainWindow = mainWindow;
+                mainWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Unable to load data.", "Error", MessageBoxButton.OK);
+                Current.Shutdown(-1);
+            }
+        }
     }
 }
